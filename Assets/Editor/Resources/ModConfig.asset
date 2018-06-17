@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: ModConfig
   m_EditorClassIdentifier: 
   id: USA
-  title: USAMazes
+  title: USA Mazes
   description: 'Are you ready for a road trip? It''ll be over before you know it!
 
 
@@ -21,6 +21,6 @@ MonoBehaviour:
     Implementation: Riverbui
 
     ID: USA'
-  version: 1.0
+  version: 0.1a
   outputFolder: build
   previewImage: {fileID: 2800000, guid: d05a4b15e80097c4c92283272d928e6d, type: 3}

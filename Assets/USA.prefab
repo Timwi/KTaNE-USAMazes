@@ -2157,8 +2157,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ModuleType: USA
-  ModuleDisplayName: USA Mazes
-  RequiresTimerVisibility: 1
+  ModuleDisplayName: USA Maze
+  RequiresTimerVisibility: 0
 --- !u!114 &114367872075153258
 MonoBehaviour:
   m_ObjectHideFlags: 1
