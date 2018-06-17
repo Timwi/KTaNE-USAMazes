@@ -15,14 +15,14 @@ public class USA : MonoBehaviour
     public TextMesh visCurrent, visOrigin, visDestination;
     bool isActive = false;
     private int origin, destination, current;
-    private readonly int[] circle = new [] { 4, 36, 25, 49, 37, 33, 44, 41, 42, 31, 40, 11, 2, 17, 1, 8 },
+    private readonly int[] circle = new [] { 4, 36, 25, 49, 37, 33, 44, 26, 42, 31, 40, 11, 2, 17, 1, 8 },
         square = new[] { 46, 12, 31, 35, 25, 40, 13, 23, 2, 24, 8, 9, 37, 19, 45, 29 },
         diamond = new[] { 36, 12, 5, 15, 39, 9, 27, 40, 13, 14, 41, 24, 19, 7, 29, 20 },
-        trap = new[] { 36, 32, 40, 28, 35, 15, 14, 21, 1, 24, 16, 44, 37, 30, 18, 33 },
-        parallel = new[] { 3, 32, 22, 11, 41, 23, 21, 34 },
-        triangle = new[] { 12, 49, 22, 47, 42, 2, 16, 34 },
+        trap = new[] { 36, 32, 40, 28, 35, 15, 14, 21, 1, 24, 16, 44, 37, 30, 18, 33, 2, 41 },
+        parallel = new[] { 3, 32, 22, 11, 41, 23, 21, 34, 35, 5 },
+        triangle = new[] { 12, 49, 22, 47, 42, 2, 16, 34, 45, 18 },
         heart = new[] { 12, 43, 47, 13, 23, 35, 34, 48, 18, 6 },
-        star = new[] { 43, 49, 28, 23, 11, 13, 47, 21, 48, 37, 18, 38 };
+        star = new[] { 43, 49, 28, 23, 11, 13, 47, 21, 48, 37, 18, 38, 44, 41 };
     public string[] states;
 
     void Start()
@@ -31,9 +31,8 @@ public class USA : MonoBehaviour
         origin = UnityEngine.Random.Range(0, 50);
         destination = origin;
         //while (destination == origin) destination = UnityEngine.Random.Range(0, 50);
-        while (destination.Equals(origin) || new[] { 26, 45, 29, 20 }.Select(x => x.Equals(origin) || x.Equals(destination)).Contains(true) || (destination.Equals(0) && !origin.Equals(10)) || (destination.Equals(10) && !origin.Equals(0)))
+        while (destination.Equals(origin) || (destination.Equals(0) && !origin.Equals(10)) || (destination.Equals(10) && !origin.Equals(0)))
         {
-            origin = UnityEngine.Random.Range(0, 50);
             destination = UnityEngine.Random.Range(0, 50);
         }
         current = origin;
@@ -145,7 +144,7 @@ public class USA : MonoBehaviour
                     if ((current.Equals(0) || current.Equals(10)) && !(destination.Equals(0) || destination.Equals(10)))
                     {
                         var stay = current;
-                        while (new[] { 45, 29, 20, stay }.Select(x => x.Equals(current)).Contains(true)) current = UnityEngine.Random.Range(0, 50);
+                        while (stay.Equals(current)) current = UnityEngine.Random.Range(0, 50);
                         visCurrent.text = states[current];
                     }
                     else if ((current.Equals(0) && destination.Equals(10)) || (current.Equals(10) && destination.Equals(0)))
