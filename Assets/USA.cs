@@ -15,7 +15,7 @@ public class USA : MonoBehaviour
     public TextMesh visCurrent, visOrigin, visDestination, arrow;
     bool isActive = false;
     private int origin, destination, current;
-    private readonly int[] circle = new [] { 4, 36, 25, 49, 37, 33, 44, 26, 42, 31, 40, 11, 2, 17, 1, 8 },
+    private readonly int[] circle = new[] { 4, 36, 25, 49, 37, 33, 44, 26, 42, 31, 40, 11, 2, 17, 1, 8 },
         square = new[] { 46, 12, 31, 35, 25, 40, 13, 23, 2, 24, 8, 9, 37, 19, 45, 29 },
         diamond = new[] { 36, 12, 5, 15, 39, 9, 27, 40, 13, 14, 41, 24, 19, 7, 29, 20 },
         trap = new[] { 36, 32, 40, 28, 35, 15, 14, 21, 1, 24, 16, 44, 37, 30, 18, 33, 2, 41 },
@@ -172,7 +172,9 @@ public class USA : MonoBehaviour
         };
     }
 
-    private string TwitchHelpMessage = "Submit path using !{0} press 01234567 or !{0} press c q d z p t h r [Circle, sQuare, Diamond, trapiZoid, Parallelogram, Triangle, Heart, staR]";
+#pragma warning disable 414
+    private readonly string TwitchHelpMessage = "Submit path using “!{0} press 01234567” or “!{0} press c q d z p t h r” [Circle, sQuare, Diamond, trapeZoid, Parallelogram, Triangle, Heart, staR]";
+#pragma warning restore 414
 
     private KMSelectable[] ProcessTwitchCommand(string command)
     {
