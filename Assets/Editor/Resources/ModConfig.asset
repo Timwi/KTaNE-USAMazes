@@ -21,6 +21,6 @@ MonoBehaviour:
     Implementation: Riverbui
 
     ID: USA'
-  version: 0.1a
+  version: 0.8a
   outputFolder: build
   previewImage: {fileID: 2800000, guid: d05a4b15e80097c4c92283272d928e6d, type: 3}
