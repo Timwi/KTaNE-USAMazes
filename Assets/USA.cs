@@ -178,47 +178,50 @@ public class USA : MonoBehaviour
 
     private KMSelectable[] ProcessTwitchCommand(string command)
     {
-        int num = 0;
         command = command.ToLowerInvariant();
         List<KMSelectable> s = new List<KMSelectable>();
-        if (!command.StartsWith("press ") || command.Contains("8") || command.Contains("9")) return null;
+        if (!command.StartsWith("press ")) return null;
         command = command.Replace("press ", "");
-        for (int i = 0; i < command.Length; i++)
+        foreach (char c in command)
         {
-            if (int.TryParse(command, out num)) s.Add(Shapes[command[i] - '0']);
-            else
+            switch (c)
             {
-                switch (command[i])
-                {
-                    case 'c':
-                        s.Add(Shapes[0]);
-                        break;
-                    case 'q':
-                        s.Add(Shapes[1]);
-                        break;
-                    case 'd':
-                        s.Add(Shapes[2]);
-                        break;
-                    case 'z':
-                        s.Add(Shapes[3]);
-                        break;
-                    case 'p':
-                        s.Add(Shapes[4]);
-                        break;
-                    case 't':
-                        s.Add(Shapes[5]);
-                        break;
-                    case 'h':
-                        s.Add(Shapes[6]);
-                        break;
-                    case 'r':
-                        s.Add(Shapes[7]);
-                        break;
-                    case ' ':
-                        break;
-                    default:
-                        return null;
-                }
+                case 'c':
+                case '0':
+                    s.Add(Shapes[0]);
+                    break;
+                case 'q':
+                case '1':
+                    s.Add(Shapes[1]);
+                    break;
+                case 'd':
+                case '2':
+                    s.Add(Shapes[2]);
+                    break;
+                case 'z':
+                case '3':
+                    s.Add(Shapes[3]);
+                    break;
+                case 'p':
+                case '4':
+                    s.Add(Shapes[4]);
+                    break;
+                case 't':
+                case '5':
+                    s.Add(Shapes[5]);
+                    break;
+                case 'h':
+                case '6':
+                    s.Add(Shapes[6]);
+                    break;
+                case 'r':
+                case '7':
+                    s.Add(Shapes[7]);
+                    break;
+                case ' ':
+                    break;
+                default:
+                    return null;
             }
         }
         return s.ToArray();
