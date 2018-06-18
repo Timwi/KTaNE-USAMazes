@@ -12,7 +12,7 @@ public class USA : MonoBehaviour
     public KMBombModule Module;
     public KMAudio Audio;
     public KMSelectable[] Shapes;
-    public TextMesh visCurrent, visOrigin, visDestination;
+    public TextMesh visCurrent, visOrigin, visDestination, arrow;
     bool isActive = false;
     private int origin, destination, current;
     private readonly int[] circle = new [] { 4, 36, 25, 49, 37, 33, 44, 26, 42, 31, 40, 11, 2, 17, 1, 8 },
@@ -27,6 +27,9 @@ public class USA : MonoBehaviour
 
     void Start()
     {
+        visCurrent.color = Color.black;
+        visOrigin.color = Color.black;
+        visDestination.color = Color.black;
         _moduleID = _moduleIDCounter++;
         origin = UnityEngine.Random.Range(0, 50);
         destination = origin;
@@ -49,6 +52,10 @@ public class USA : MonoBehaviour
             int j = i;
             Shapes[i].OnInteract = ButtonHandler(j);
         }
+        visCurrent.color = Color.white;
+        visOrigin.color = Color.white;
+        visDestination.color = Color.white;
+        arrow.color = Color.white;
         isActive = true;
     }
 

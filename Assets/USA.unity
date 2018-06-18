@@ -147,11 +147,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 114332548296222884, guid: f154ef653396b394b807051fd7235dc7,
-        type: 2}
-      propertyPath: AllowSelectionWrapY
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1189275428209292, guid: f154ef653396b394b807051fd7235dc7, type: 2}
       propertyPath: m_Name
       value: USAMaze
