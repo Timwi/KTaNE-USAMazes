@@ -59,7 +59,7 @@ public class USA : MonoBehaviour
         visDestination.color = Color.white;
         arrow.color = Color.white;
         isActive = true;
-        Debug.LogFormat("[USA Maze {0}] Starting State: {1}, Destination: {2}", _moduleID, stateNames[origin], stateNames[destination]);
+        Debug.LogFormat("[USA Maze #{0}] Starting State: {1}, Destination: {2}", _moduleID, stateNames[origin], stateNames[destination]);
     }
 
     KMSelectable.OnInteractHandler ButtonHandler(int j)
@@ -158,23 +158,23 @@ public class USA : MonoBehaviour
                         var stay = current;
                         while (stay.Equals(current)) current = UnityEngine.Random.Range(0, 50);
                         visCurrent.text = states[current];
-                        Debug.LogFormat("[USA Maze {0}] Flying to {1} - {2}.", _moduleID, states[current], stateNames[current]);
+                        Debug.LogFormat("[USA Maze #{0}] Flying to {1} - {2}.", _moduleID, states[current], stateNames[current]);
                     }
                     else if ((current.Equals(0) && destination.Equals(10)) || (current.Equals(10) && destination.Equals(0)))
                     {
                         visCurrent.text = states[destination];
-                        Debug.LogFormat("[USA Maze {0}] Flying from {1} to {2}.", _moduleID, stateNames[origin], stateNames[destination]);
+                        Debug.LogFormat("[USA Maze #{0}] Flying from {1} to {2}.", _moduleID, stateNames[origin], stateNames[destination]);
                         Module.HandlePass();
                         isActive = false;
                     }
                     else Module.HandleStrike();
                     break;
             }
-            if ((current != d) && (d != 0) && (d != 10) ) Debug.LogFormat("[USA Maze {0}] Border {1} passed, next stop: {2} - {3}!", _moduleID, shapeNames[j], states[current], stateNames[current]);
-            else Debug.LogFormat("[USA Maze {0}] Halted at border {1}, Strike!", _moduleID, shapeNames[j]);
+            if ((current != d) && (d != 0) && (d != 10) ) Debug.LogFormat("[USA Maze #{0}] Border {1} passed, next stop: {2} - {3}!", _moduleID, shapeNames[j], states[current], stateNames[current]);
+            else Debug.LogFormat("[USA Maze #{0}] Halted at border {1}, Strike!", _moduleID, shapeNames[j]);
             if (current == destination)
             {
-                Debug.LogFormat("[USA Maze {0}] Arrived at destination!", _moduleID);
+                Debug.LogFormat("[USA Maze #{0}] Arrived at destination!", _moduleID);
                 Module.HandlePass();
                 isActive = false;
             }
