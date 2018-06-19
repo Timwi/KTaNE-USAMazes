@@ -151,6 +151,21 @@ Prefab:
       propertyPath: m_Name
       value: USAMaze
       objectReference: {fileID: 0}
+    - target: {fileID: 102159894840669156, guid: f154ef653396b394b807051fd7235dc7,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 102075726559247958, guid: f154ef653396b394b807051fd7235dc7,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 102783327679646982, guid: f154ef653396b394b807051fd7235dc7,
+        type: 2}
+      propertyPath: m_Color.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f154ef653396b394b807051fd7235dc7, type: 2}
   m_IsPrefabParent: 0
