@@ -64,6 +64,7 @@ public class USA : MonoBehaviour
         return delegate
         {
             Shapes[j].AddInteractionPunch(.3f);
+            Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
             if (!isActive) return false;
             switch (j)
             {
