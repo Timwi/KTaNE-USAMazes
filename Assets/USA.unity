@@ -108,7 +108,7 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &507397145
+--- !u!1001 &563470028
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -145,26 +145,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4403552193000298, guid: f154ef653396b394b807051fd7235dc7, type: 2}
       propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1189275428209292, guid: f154ef653396b394b807051fd7235dc7, type: 2}
-      propertyPath: m_Name
-      value: USAMaze
-      objectReference: {fileID: 0}
-    - target: {fileID: 102159894840669156, guid: f154ef653396b394b807051fd7235dc7,
-        type: 2}
-      propertyPath: m_Color.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 102075726559247958, guid: f154ef653396b394b807051fd7235dc7,
-        type: 2}
-      propertyPath: m_Color.rgba
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 102783327679646982, guid: f154ef653396b394b807051fd7235dc7,
-        type: 2}
-      propertyPath: m_Color.rgba
-      value: 4294967295
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f154ef653396b394b807051fd7235dc7, type: 2}
@@ -295,7 +276,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439642, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8814ea52310d2614a9feda02ec355ae4, type: 2}
