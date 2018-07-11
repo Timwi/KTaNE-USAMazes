@@ -171,7 +171,7 @@ public class USA : MonoBehaviour
                     break;
             }
             if ((current != d) && (d != 0) && (d != 10) ) Debug.LogFormat("[USA Maze #{0}] Border {1} passed, next stop: {2} - {3}!", _moduleID, shapeNames[j], states[current], stateNames[current]);
-            else Debug.LogFormat("[USA Maze #{0}] Halted at border {1}, Strike!", _moduleID, shapeNames[j]);
+            else if ((d != 0) && (d != 10)) Debug.LogFormat("[USA Maze #{0}] Halted at border {1}, Strike!", _moduleID, shapeNames[j]);
             if (current == destination)
             {
                 Debug.LogFormat("[USA Maze #{0}] Arrived at destination!", _moduleID);
