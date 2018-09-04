@@ -20,7 +20,20 @@ MonoBehaviour:
 
     Implementation: Riverbui
 
-    ID: USA'
-  version: v1.0
+    ID: USA
+
+    Models: TheyCallMeSpy
+
+
+    --This module contains some options that allows you to choose which mazes you''re
+    playing [Only option at the moment is USA, but there is the possibility of hosting
+    other landmasses in the future] and change the way you interact with the module.
+
+
+    You can choose to play in Standard mode, where the shown state changes along with
+    your button presses, or you can play in Memory mode, where the visuals do not
+    change and you must keep track of the buttons you''re pressing. Standard mode
+    is enabled by default.'
+  version: v2.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: d05a4b15e80097c4c92283272d928e6d, type: 3}
+  previewImage: {fileID: 2800000, guid: 361a316e5d4ab804db87f3c46a06fad3, type: 3}
