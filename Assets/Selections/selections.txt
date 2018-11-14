@@ -1,50 +1,51 @@
-[0]USA AK Alaska NCWA,MQCA,EZSC,WPDE,UDRI,FTME,SHND
+[0]USA USA
+ AK Alaska NCWA,MQCA,EZSC,WPDE,UDRI,FTME,SHND
  AL Alabama XGA,CFL,ZMS,XTN
  AR Arkansas CLA,XMO,QMS,XOK,ZTN,TTX,B
  AZ Arizona XCA,XNM,PNV,XUT
- CA California XAZ,COR,XNV
+ CA California COR,XNV
  CO Colorado DKS,XNE,XNM,POK,XUT,XWY,B
  CT Connecticut HMA
  DE Delaware DMD
- FL Florida CAL,QGA
- GA Georgia XAL,QFL,XNC,DSC,XTN
+ FL Florida QGA
+ GA Georgia XNC,DSC,XTN
  HI Hawaii NQCA,MCWA,ETME,WDRI,UPDE,FZSC,SRTX
  IA Iowa RIL,PMN,XMO,XNE,CSD,XWI,B
  ID Idaho XMT,XNV,DOR,HUT,QWA,TWY
- IL Illinois XKY,RIA,DIN,QMO,HWI
- IN Indiana DIL,XKY,ZMI,XOH,B
- KS Kansas DCO,XMO,XNE,ZOK,B
- KY Kentuky XIL,XIN,TOH,XTN,ZVA,XWV,B
- LA Louisiana CAR,XMS,XTX
- MA Massachusetts HCT,XNH,ZNY,RRI,TVT
- MD Maryland DDE,QPA,XVA,XWV
+ IL Illinois DIN,XKY,QMO,HWI
+ IN Indiana XKY,ZMI,XOH,B
+ KS Kansas XMO,XNE,ZOK,B
+ KY Kentucky TOH,XTN,ZVA,XWV,B
+ LA Louisiana XMS,XTX
+ MA Massachusetts XNH,ZNY,RRI,TVT
+ MD Maryland QPA,XVA,XWV
  ME Maine DNH
- MI Michigan ZIN,POH,RWI
- MN Minnesota PIA,XND,XSD,TWI
- MO Missouri XAR,XIA,QIL,XKS,RNE,HOK,PTN,B
- MS Mississippi ZAL,QAR,XLA,DTN
- MT Montana XID,XND,QSD,CWY
- NC North_Carolina XGA,XSC,XTN,CVA
- ND North_Dakota XMN,XMT,DSD
- NE Nebraska XCO,XIA,XKS,RMO,ZSD,XWY,B
- NH New_Hampshire DME,QVT,XMA
+ MI Michigan POH,RWI
+ MN Minnesota XND,XSD,TWI
+ MO Missouri RNE,HOK,PTN,B
+ MS Mississippi DTN
+ MT Montana XND,QSD,CWY
+ NC North_Carolina XSC,XTN,CVA
+ ND North_Dakota DSD
+ NE Nebraska ZSD,XWY,B
+ NH New_Hampshire QVT,XMA
  NJ New_Jersey XNY,ZPA
- NM New_Mexico XAZ,XCO,QOK,CTX
- NV Nevada PAZ,XCA,XID,ZOR,XUT,B
- NY New_York ZMA,XNJ,CPA,XVT
- OH Ohio XIN,TKY,PMI,XPA,HWV
- OK Oklahoma XAR,PCO,ZKS,HMO,QNM,XTX,B
- OR Oregon CCA,DID,ZNV,XWA
- PA Pennsylvania QMD,ZNJ,CNY,XOH,RWV
- RI Rhode_Island RMA
- SC South_Carolina DGA,XNC
- SD South_Dakota CIA,QMT,XMN,DND,ZNE,XWY,B
- TN Tennessee XAL,ZAR,XGA,XKY,PMO,XNC,DMS,RVA,B
- TX Texas TAR,XLA,CNM,XOK
- UT Utah XAZ,XCO,HID,XNV,RWY,B
- VA Virginia ZKY,XMD,CNC,RTN,XWV
- VT Vermont TMA,QNH,XNY
- WA Washington QID,XOR
- WI Wisconsin XIA,HIL,RMI,TMN
- WV West_Virginia XKY,XMD,HOH,RPA,XVA,B
- WY Wyoming XCO,TID,CMT,XNE,XSD,RUT,B
+ NM New_Mexico QOK,CTX
+ NV Nevada ZOR,XUT,B
+ NY New_York CPA,XVT
+ OH Ohio XPA,HWV
+ OK Oklahoma XTX,B
+ OR Oregon XWA
+ PA Pennsylvania RWV
+ RI Rhode_Island Y
+ SC South_Carolina Y
+ SD South_Dakota XWY,B
+ TN Tennessee RVA,B
+ TX Texas Y
+ UT Utah RWY,B
+ VA Virginia XWV
+ VT Vermont Y
+ WA Washington Y
+ WI Wisconsin Y
+ WV West_Virginia B
+ WY Wyoming B

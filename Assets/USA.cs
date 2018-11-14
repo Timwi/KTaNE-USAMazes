@@ -9,6 +9,7 @@ class USA : MonoBehaviour
 {
     private WorldSettings Settings = new WorldSettings();
     private static int _moduleIDCounter = 1;
+    private static List<int> chosenMazes = new List<int>();
     internal int _moduleID;
     public KMBombInfo Info;
     public KMBombModule Module;
@@ -20,8 +21,7 @@ class USA : MonoBehaviour
     internal List<string> circle, square, diamond, trap, parallel, triangle, heart, star,
         initials, fullNames, flown;
     internal List<string[]> assignments = new List<string[]>();
-    public string[] MazesOriginal;
-    internal static List<string> Mazes;
+    internal static List<string> Mazes, MazeNames;
     internal static bool Read;
     public TextAsset Selections;
     private readonly string[] shapeNames = new[] { "Circle", "Square", "Diamond", "Trapezoid", "Parallelogram", "Triangle", "Heart", "Star" };
@@ -43,27 +43,55 @@ class USA : MonoBehaviour
 
     void Start()
     {
+        _moduleID = _moduleIDCounter++;
         Inits();
         ModConfig<WorldSettings> modConfig = new ModConfig<WorldSettings>("WorldSettings");
         Settings = modConfig.Settings;
+        visCurrent.color = Color.black;
+        visMaze.color = Color.black;
+        visDestination.color = Color.black;
+        Shapes.Last().gameObject.SetActive(false);
         if (!Read)
         {
-            Mazes = MazesOriginal.ToList();
+            //Read what mazes are available [this should only need to be done once, as it is static]
+            Mazes = TextReader.MazesOriginal(this);
+            //Veto mazes based on settings, which should also only need to be done once.
             TextReader.Lose(Settings);
+            //To allow each maze to be generated at least once, keep track of how many instances of each maze there are.
+            foreach (string value in Mazes)
+            {
+                chosenMazes.Add(0);
+            }
         }
+        //For testing, since we can't access settings in Unity
 #if (UNITY_EDITOR)
         Settings.Mode = Mode;
         Settings.AutoReset = auto;
 #else
+        //Mode and auto are used for TP compatibility, rather than using Settings.Mode and Settings.AutoReset throughout the code.
+        //This is so they can be set during the instance of TP without changing the setting.
         Mode = Settings.Mode;
         auto = Settings.AutoReset;
 #endif
-        maze = UnityEngine.Random.Range(0, Mazes.Count);
+        //See if there are more instances of one maze over the others
+        var h = chosenMazes.Max();
+        var c = chosenMazes.Min();
+        //Add the indices of the remaining values to a new list, which will go into random.range
+        //Then the value of chosenMazes at the value of ints will be passed into the rest of the code.
+        var ints = new List<int>();
+        if (h == c) ints.AddRange(chosenMazes.Select(x => chosenMazes.IndexOf(x)));
+        else
+        {
+            var e = chosenMazes.Where(x => x != h).Select(x => chosenMazes.IndexOf(x));
+            ints.AddRange(e);
+        }
+        //Randomize the values in ints, return the value that will be the maze used
+        maze = ints[UnityEngine.Random.Range(0, ints.Count)];
+        //Update the list to let it know a maze has been selected
+        chosenMazes[maze]++;
+        Debug.LogFormat("[USA Maze #{0}] Chosen maze: {1}", _moduleID, MazeNames[maze]);
+        //Grab the information from the maze chosen.
         TextReader.Run(this, Selections, maze);
-        visCurrent.color = Color.black;
-        visMaze.color = Color.black;
-        visDestination.color = Color.black;
-        _moduleID = _moduleIDCounter++;
         origin = UnityEngine.Random.Range(0, initials.Count);
         destination = origin;
         while (destination == origin) destination = UnityEngine.Random.Range(0, initials.Count);
@@ -84,8 +112,8 @@ class USA : MonoBehaviour
         visCurrent.color = Color.white;
         visMaze.color = Color.white;
         visDestination.color = Color.white;
-        if (Mode == Mode.Memory) visReset.color = Color.white;
-        else Shapes.Last().gameObject.SetActive(false);
+        if (Mode == Mode.Memory) Shapes.Last().gameObject.SetActive(true);
+        visReset.color = Color.white;
         isActive = true;
         Debug.LogFormat("[USA Maze #{0}] {3}: Departing {1} to {2}.", _moduleID, fullNames[origin], fullNames[destination], day.ToString());
     }
