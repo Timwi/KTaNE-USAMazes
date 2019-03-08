@@ -27,7 +27,7 @@ class USA : MonoBehaviour
     private readonly string[] shapeNames = new[] { "Circle", "Square", "Diamond", "Trapezoid", "Parallelogram", "Triangle", "Heart", "Star" };
     internal static DayOfWeek day = DateTime.Now.DayOfWeek;
     public Mode Mode;
-    public bool auto;
+    public bool auto, widget;
 
     internal void Inits()
     {
@@ -101,6 +101,11 @@ class USA : MonoBehaviour
 
     void Activate()
     {
+        if (Info.QueryWidgets("day", null).Count == 1)
+        {
+            day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), Info.QueryWidgets("day", null).Select(x => Newtonsoft.Json.JsonConvert.DeserializeObject<Dictionary<string, string>>(x)).First()["day"]);
+            widget = true;
+        }
         visCurrent.text = initials[current];
         visMaze.text = Mazes[maze];
         visDestination.text = initials[destination];
@@ -113,6 +118,8 @@ class USA : MonoBehaviour
         visMaze.color = Color.white;
         visDestination.color = Color.white;
         if (Mode == Mode.Memory) Shapes.Last().gameObject.SetActive(true);
+        else GetComponent<KMSelectable>().Children[3] = null;
+        GetComponent<KMSelectable>().UpdateChildren();
         visReset.color = Color.white;
         isActive = true;
         Debug.LogFormat("[USA Maze #{0}] {3}: Departing {1} to {2}.", _moduleID, fullNames[origin], fullNames[destination], day.ToString());
@@ -166,7 +173,7 @@ class USA : MonoBehaviour
 
     private void Update()
     {
-        if (day != DateTime.Now.DayOfWeek)
+        if (!widget && day != DateTime.Now.DayOfWeek)
         {
             day = DateTime.Now.DayOfWeek;
             TextReader.Assign(this);
@@ -224,15 +231,18 @@ class USA : MonoBehaviour
         {
             case Mode.Standard:
                 Shapes.Last().gameObject.SetActive(false);
+                GetComponent<KMSelectable>().Children[3] = null;
                 visCurrent.text = initials[current];
                 return "Mode for current module changed to Standard mode";
             case Mode.Memory:
                 Shapes.Last().gameObject.SetActive(true);
+                GetComponent<KMSelectable>().Children[3] = Shapes.Last();
                 visReset.color = Color.white;
                 visCurrent.text = initials[origin];
                 current = origin;
                 return "Module reset! Mode for current module changed to Memory mode";
         }
+        GetComponent<KMSelectable>().UpdateChildren();
         return "";
     }
 }
