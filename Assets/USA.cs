@@ -41,12 +41,38 @@ class USA : MonoBehaviour
         star = new List<string>();
     }
 
+    static Dictionary<string, object>[] TweaksEditorSettings = new Dictionary<string, object>[]
+    {
+        new Dictionary<string, object>
+        {
+            { "Filename", "WorldSettings.json" },
+            { "Name", "USA Maze Settings" },
+            { "Listings", new List<Dictionary<string, object>>
+            {
+                new Dictionary<string, object>
+                {
+                    { "Key", "Mode" },
+                    { "Description", "Determine if Memory mode or Standard mode is active." },
+                    { "Type", "Dropdown" },
+                    { "DropdownItems", new List<object> { "Standard", "Memory" } }
+                },
+                new Dictionary<string, object>
+                {
+                    { "Key", "AutoReset" },
+                    { "Text", "Auto Reset" },
+                    { "Description", "Have the module reset on strikes in Memory Mode." }
+                }
+            }}
+        }
+    };
+
     void Start()
     {
         _moduleID = _moduleIDCounter++;
         Inits();
         ModConfig<WorldSettings> modConfig = new ModConfig<WorldSettings>("WorldSettings");
         Settings = modConfig.Settings;
+        modConfig.Settings = Settings;
         visCurrent.color = Color.black;
         visMaze.color = Color.black;
         visDestination.color = Color.black;
@@ -258,9 +284,9 @@ class WorldSettings
 #pragma warning disable 414
     private string HowToUseMode = "To use standard mode, use Standard or 0. For memory mode, use Memory or 1.";
     public Mode Mode = Mode.Standard;
-    private string AutoResetOption = "Have the module automatically reset on strikes in Memory Mode.";
+    private string HowToUseAutoReset = "Have the module automatically reset on strikes in Memory Mode.";
     public bool AutoReset = true;
-    private string VetoInfo = "Mazes will typically take the full name featured in the manual.";
+    private string HowToVeto = "Mazes will typically take the full name featured in the manual.";
     public List<string> Veto = new List<string> { "If you would like to keep certain mazes from spawning, enter them here." };
 #pragma warning restore 414
 }
