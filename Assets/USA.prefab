@@ -3508,11 +3508,10 @@ MonoBehaviour:
   visMaze: {fileID: 102159894840669156}
   visDestination: {fileID: 102075726559247958}
   visReset: {fileID: 102783327679646982}
-  MazesOriginal:
-  - USA
   Selections: {fileID: 4900000, guid: 687cef131c7c9804db9e48ad782036bd, type: 3}
   Mode: 0
   auto: 0
+  widget: 0
 --- !u!114 &114593453426288444
 MonoBehaviour:
   m_ObjectHideFlags: 1

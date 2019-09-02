@@ -20,6 +20,7 @@ class USA : MonoBehaviour
     private int origin, destination, current, maze;
     internal List<string> circle, square, diamond, trap, parallel, triangle, heart, star,
         initials, fullNames, flown;
+    internal List<string>[] lists { get { return new[] { circle, square, diamond, trap, parallel, triangle, heart, star }; } }
     internal List<string[]> assignments = new List<string[]>();
     internal static List<string> Mazes, MazeNames;
     internal static bool Read;
@@ -165,7 +166,6 @@ class USA : MonoBehaviour
             Shapes[j].AddInteractionPunch(.3f);
             Audio.PlayGameSoundAtTransform(KMSoundOverride.SoundEffect.ButtonPress, transform);
             if (!isActive) return false;
-            var lists = new[] { circle, square, diamond, trap, parallel, triangle, heart, star };
             if (lists[j].Contains(initials[current]))
             {
                 var i = lists[j].IndexOf(initials[current]);
@@ -207,7 +207,7 @@ class USA : MonoBehaviour
     }
 
 #pragma warning disable 414
-    private readonly string TwitchHelpMessage = "Submit path using “!{0} press 01234567” or “!{0} press c q d z p t h r” [Circle, sQuare, Diamond, trapeZoid, Parallelogram, Triangle, Heart, staR]. Toggle modes with !{0} [toggle/switch] [standard/memory]";
+    private readonly string TwitchHelpMessage = "Submit path using “!{0} press 12345678” or “!{0} press cqdzpthr” [Circle, sQuare, Diamond, trapeZoid, Parallelogram, Triangle, Heart, staR]. Toggle modes with !{0} [toggle/switch] [standard/memory]";
 #pragma warning restore 414
 
     private IEnumerator ProcessTwitchCommand(string command)
@@ -216,11 +216,11 @@ class USA : MonoBehaviour
         List<KMSelectable> s = new List<KMSelectable>();
         var match = "^(full|)(toggle|switch)( standard| memory|)";
         if (Regex.Match(command, match).Success) yield return "sendtochat " + ToggleMode(command);
-        if (!command.StartsWith("press ")) yield break;
+        var chars = new[] { 'c', 'q', 'd', 'z', 'p', 't', 'h', 'r' };
+        if (!command.StartsWith("press ") && command.Any(x => !chars.Contains(x) && ((x - '0' < 1) || (x - '0' > 8) ))) yield break;
         yield return null;
         if (command.Contains("reset") && Mode == Mode.Memory) yield return new[] { Shapes.Last() };
         command = command.Replace("press ", "");
-        var chars = new[] { 'c', 'q', 'd', 'z', 'p', 't', 'h', 'r' };
         auto = true;
         foreach (char c in command)
         {
@@ -228,9 +228,9 @@ class USA : MonoBehaviour
             if (c == ' ') continue;
             int index;
             var b = int.TryParse(c.ToString(), out index);
-            if (chars.Contains(c)) index = Array.IndexOf(chars, c);
-            if (index < 0 || index > 7) yield break;
-            s.Add(Shapes[index]);
+            if (chars.Contains(c)) index = Array.IndexOf(chars, c) + 1;
+            if (index < 1 || index > 8) yield break;
+            s.Add(Shapes[index - 1]);
         }
         auto = Settings.AutoReset;
         yield return s.ToArray();
@@ -270,6 +270,62 @@ class USA : MonoBehaviour
         }
         GetComponent<KMSelectable>().UpdateChildren();
         return "";
+    }
+
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        var end = false;
+        var movement = new Stack<int>();
+        movement.Push(current);
+        var presses = new Stack<int[]>();
+        presses.Push(new[] { -1, 0 });
+        var explored = new List<int>();
+        var curLoc = current;
+        var validButtons = lists.Where(x => x.Contains(initials[current])).ToArray();
+        var buttonIndicies = validButtons.Select(x => Array.IndexOf(lists, x)).ToArray();
+        var validIndicies = validButtons.Select(x => x.IndexOf(initials[current])).ToArray();
+        var direction = 0;
+        while (!end)
+        {
+            if (direction == validButtons.Count())
+            {
+                movement.Pop();
+                presses.Pop();
+                explored.Add(curLoc);
+                curLoc = movement.Peek();
+                direction = ++presses.Peek()[1];
+                validButtons = lists.Where(x => x.Contains(initials[curLoc])).ToArray();
+                buttonIndicies = validButtons.Select(x => Array.IndexOf(lists, x)).ToArray();
+                validIndicies = validButtons.Select(x => x.IndexOf(initials[curLoc])).ToArray();
+                continue;
+            }
+            var add = validIndicies[direction] % 2 == 0 ? validIndicies[direction] + 1 : validIndicies[direction] - 1;
+            if (explored.Concat(movement).Contains(initials.IndexOf(validButtons[direction][add])))
+            {
+                direction++;
+                continue;
+            }
+            var prevLoc = curLoc;
+            curLoc = initials.IndexOf(validButtons[direction][add]);
+            movement.Push(curLoc);
+            presses.Peek()[1] = direction;
+            presses.Push(new[] { buttonIndicies[direction], 0 });
+            validButtons = lists.Where(x => x.Contains(initials[curLoc])).ToArray();
+            buttonIndicies = validButtons.Select(x => Array.IndexOf(lists, x)).ToArray();
+            validIndicies = validButtons.Select(x => x.IndexOf(initials[curLoc])).ToArray();
+            direction = 0;
+            if (curLoc == destination)
+                end = true;
+            yield return true;
+        }
+
+        presses = new Stack<int[]>(presses);
+        presses.Pop();
+        while (presses.Count > 0)
+        {
+            Shapes[presses.Pop()[0]].OnInteract();
+            yield return true;
+        }
     }
 }
 
