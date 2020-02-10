@@ -24,6 +24,8 @@ MonoBehaviour:
 
     Models: TheyCallMeSpy
 
+    Manual: https://ktane.timwi.de/HTML/USA%20Maze.html
+
 
     --This module contains some options that allows you to choose which mazes you''re
     playing [Only option at the moment is USA, but there is the possibility of hosting
