@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -507,22 +508,93 @@ class USA : MonoBehaviour
         }
         return null;
     }
-}
 
-public enum Mode
-{
-    Standard,
-    Memory
-}
+    struct Connection
+    {
+        public string FromState;
+        public string ToState;
+        public Shape Shape;
+    }
 
-class WorldSettings
-{
-#pragma warning disable 414
-    private string HowToUseMode = "To use standard mode, use Standard or 0. For memory mode, use Memory or 1.";
-    public Mode Mode = Mode.Standard;
-    private string HowToUseAutoReset = "Have the module automatically reset on strikes in Memory Mode.";
-    public bool AutoReset = true;
-    private string HowToVeto = "Mazes will typically take the full name featured in the manual.";
-    public List<string> Veto = new List<string> { "If you would like to keep certain mazes from spawning, enter them here." };
-#pragma warning restore 414
+    IEnumerator TwitchHandleForcedSolve()
+    {
+        // If we are travelling to an outlying territory (Alaska/Hawaii), and the day changes while we are executing the button presses, we need to start all over to calculate a new route
+        recalculateRoute:
+        var curDow = getDow();
+
+        // Breadth-first search
+        var already = new HashSet<string>();
+        var parents = new Dictionary<string, Connection>();
+        var q = new Queue<string>();
+        q.Enqueue(_current);
+
+        while (q.Count > 0)
+        {
+            var state = q.Dequeue();
+            if (!already.Add(state))
+                continue;
+            if (state == _destination)
+                goto found;
+
+            var traversible = new List<Connection>();
+            // Find traversible borders between continental states
+            foreach (var border in _openBorders)
+            {
+                string otherState = null;
+                if (border.Key.StartsWith(state + "-"))
+                    otherState = border.Key.Substring(state.Length + 1);
+                else if (border.Key.EndsWith("-" + state))
+                    otherState = border.Key.Substring(0, border.Key.Length - state.Length - 1);
+                if (otherState != null)
+                    traversible.Add(new Connection { FromState = state, ToState = otherState, Shape = border.Value });
+            }
+
+            // Find a connection if we’re currently in an outlying territory
+            {
+                var outIx = Array.IndexOf(_outlying, state);
+                if (outIx != -1)
+                {
+                    var allowedShape = _outOpen[outIx][(int) curDow];
+                    var otherState = _outShapes.FirstOrDefault(kvp => kvp.Value == allowedShape).Key;
+                    if (otherState != null)
+                        traversible.Add(new Connection { FromState = state, ToState = otherState, Shape = allowedShape });
+                }
+            }
+
+            // Find a connection to outlying territories
+            Shape s;
+            if (_outShapes.TryGetValue(state, out s))
+                for (var outIx = 0; outIx < _outlying.Length; outIx++)
+                    if (_outOpen[outIx][(int) curDow] == s)
+                        traversible.Add(new Connection { FromState = state, ToState = _outlying[outIx], Shape = s });
+
+            foreach (var connection in traversible)
+            {
+                if (already.Contains(connection.ToState))
+                    continue;
+                q.Enqueue(connection.ToState);
+                parents[connection.ToState] = connection;
+            }
+        }
+
+        throw new Exception("There is a bug in this module’s auto-solve handler. No path to the destination found. Please contact Timwi about this.");
+
+        found:
+        var path = new List<Shape>();
+        var curState = _destination;
+        while (curState != _current)
+        {
+            var connection = parents[curState];
+            path.Add(connection.Shape);
+            curState = connection.FromState;
+        }
+
+        for (var i = path.Count - 1; i >= 0; i--)
+        {
+            if (getDow() != curDow)
+                goto recalculateRoute;
+            Shapes[(int) path[i]].OnInteract();
+            yield return new WaitForSeconds(.2f);
+        }
+    }
 }
