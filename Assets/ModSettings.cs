@@ -4,39 +4,46 @@ using System;
 using System.IO;
 using UnityEngine;
 
-[JsonConverter(typeof(StringEnumConverter))]
 class ModConfig<T>
 {
-    public ModConfig(string name)
+    public ModConfig(string filename)
     {
-        _filename = name;
+		SettingsPath = Path.Combine(Path.Combine(Application.persistentDataPath, "Modsettings"), filename + ".json");
     }
 
-    string _filename = null;
-    
-    string SettingsPath
-    {
-        get
-        {
-            return Path.Combine(Path.Combine(Application.persistentDataPath, "Modsettings"), _filename + ".json");
-        }
-    }
+	readonly string SettingsPath = null;
 
-    public T Settings
+	public string SerializeSettings(T settings)
+	{
+		return JsonConvert.SerializeObject(settings, Formatting.Indented, new StringEnumConverter());
+	}
+
+	static readonly object settingsFileLock = new object();
+
+	public T Settings
     {
         get
         {
             try
             {
-                if (!File.Exists(SettingsPath))
+				lock(settingsFileLock)
 				{
-                    File.WriteAllText(SettingsPath, JsonConvert.SerializeObject(Activator.CreateInstance<T>(), Formatting.Indented, new StringEnumConverter()));
-                }
+					if (!File.Exists(SettingsPath))
+					{
+						File.WriteAllText(SettingsPath, SerializeSettings(Activator.CreateInstance<T>()));
+					}
 
-                return JsonConvert.DeserializeObject<T>(File.ReadAllText(SettingsPath));
+					T deserialized = JsonConvert.DeserializeObject<T>(
+						File.ReadAllText(SettingsPath),
+						new JsonSerializerSettings { Error = (object sender, Newtonsoft.Json.Serialization.ErrorEventArgs args) => args.ErrorContext.Handled = true }
+					);
+					return deserialized != null ? deserialized : Activator.CreateInstance<T>();
+				}
             }
-            catch
+            catch(Exception e)
             {
+				Debug.LogFormat("An exception has occured while attempting to read the settings from {0}\nDefault settings will be used for the type of {1}.", SettingsPath, typeof(T).ToString());
+				Debug.LogException(e);
                 return Activator.CreateInstance<T>();
             }
         }
@@ -45,13 +52,24 @@ class ModConfig<T>
         {
             if (value.GetType() == typeof(T))
             {
-                File.WriteAllText(SettingsPath, JsonConvert.SerializeObject(value, Formatting.Indented, new StringEnumConverter()));
-            }
+				lock (settingsFileLock)
+				{
+					try
+					{
+						File.WriteAllText(SettingsPath, SerializeSettings(value));
+					}
+					catch (Exception e)
+					{
+						Debug.LogFormat("Failed to write to {0}", SettingsPath);
+						Debug.LogException(e);
+					}
+				}
+			}
         }
     }
 
     public override string ToString()
     {
-        return JsonConvert.SerializeObject(Settings, Formatting.Indented);
+        return SerializeSettings(Settings);
     }
 }

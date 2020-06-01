@@ -11,29 +11,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 615501dbe4f3fe94fbf4b564abb10237, type: 3}
   m_Name: ModConfig
   m_EditorClassIdentifier: 
-  id: USA
-  title: USA Mazes
-  description: 'Are you ready for a road trip? It''ll be over before you know it!
-
-
-    Module: Blananas2
-
-    Implementation: Riverbui
-
-    ID: USA
-
-    Models: TheyCallMeSpy
-
-
-    --This module contains some options that allows you to choose which mazes you''re
-    playing [Only option at the moment is USA, but there is the possibility of hosting
-    other landmasses in the future] and change the way you interact with the module.
-
-
-    You can choose to play in Standard mode, where the shown state changes along with
-    your button presses, or you can play in Memory mode, where the visuals do not
-    change and you must keep track of the buttons you''re pressing. Standard mode
-    is enabled by default.'
+  id: WorldMazes
+  title: World Mazes
+  author: River, Blananas2, Timwi
+  description: "Are you ready for a road trip? It'll be over before you know it!\r\n\nThis
+    mod contains two modules:\n- USA Maze: travel through the states of the USA!\n-
+    DACH Maze: travel through Germany, Austria and Switzerland!\n\nModule: Blananas2
+    & Timwi\r\nImplementation: Riverbui & Timwi\r\nModels: TheyCallMeSpy\r\nModule
+    IDs: USA, DACH\n\r\nThese modules have some options that allow you to change the
+    way you interact with the modules. You can choose to play in Standard Mode, where
+    your current state is always shown with every button press, or you can play in
+    Memory Mode, where the visuals do not change and you must keep track of the buttons
+    you\u2019re pressing. Standard Mode is enabled by default."
   version: v2.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: 361a316e5d4ab804db87f3c46a06fad3, type: 3}
+  previewImage: {fileID: 2800000, guid: d05a4b15e80097c4c92283272d928e6d, type: 3}

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UsaMaze
+namespace WorldMazes
 {
     class WorldSettings
     {
