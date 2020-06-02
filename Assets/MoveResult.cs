@@ -9,5 +9,6 @@ namespace WorldMazes
     {
         public string StrikeMessage;    // null if move was valid
         public string NewState;         // null if move was invalid
+        public bool RequireView;
     }
 }

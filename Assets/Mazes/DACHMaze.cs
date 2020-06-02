@@ -110,7 +110,7 @@ class DACHMaze : WorldMazeBase
         foreach (var otherState in _states)
             if ((_openBorders.TryGetValue(fromState + "-" + otherState, out s) && s == shape) ||
                 (_openBorders.TryGetValue(otherState + "-" + fromState, out s) && s == shape))
-                return new MoveResult { NewState = otherState };
+                return new MoveResult { NewState = otherState, RequireView = _clashes.Any(x => x.Contains(fromState)) };
 
         return new MoveResult { StrikeMessage = string.Format("{0} - the current state has no connection with that symbol. Strike!", shape) };
     }

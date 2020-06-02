@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4542565813923770}
   - component: {fileID: 114878925169795104}
   - component: {fileID: 114414744970670624}
-  - component: {fileID: 114168559037571040}
   - component: {fileID: 114429621753047710}
   m_Layer: 0
   m_Name: DACHMaze
@@ -81,18 +80,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1659129306922840}
   m_Mesh: {fileID: 4300000, guid: 5ab6c3be308beaa47b558e81d501cf7c, type: 3}
---- !u!114 &114168559037571040
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1272612170934526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adf69c2de51bd3c43bbd9bc22578ee08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _seed: 1
 --- !u!114 &114414744970670624
 MonoBehaviour:
   m_ObjectHideFlags: 1

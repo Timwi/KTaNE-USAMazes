@@ -3489,6 +3489,7 @@ MonoBehaviour:
   VisCurrent: {fileID: 102559929097633142}
   VisMaze: {fileID: 102430806963715928}
   VisDestination: {fileID: 102690609279265392}
+  VisReset: {fileID: 102141003063409328}
 --- !u!114 &114496130336288776
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -43,6 +43,12 @@ abstract class WorldMazeBase : MonoBehaviour
             _scaffold.Shapes[i].Parent = moduleSelectable;
             moduleSelectable.Children[i + 4] = _scaffold.Shapes[i];
         }
+        var modConfig = new ModConfig<WorldSettings>("WorldSettings");
+        Settings = modConfig.Settings;
+        modConfig.Settings = Settings;
+        Mode = Settings.Mode;
+        AutoReset = Settings.AutoReset;
+
         _scaffold.Reset.Parent = moduleSelectable;
         _scaffold.Reset.gameObject.SetActive(Mode == Mode.Memory);
         moduleSelectable.Children[3] = Mode == Mode.Memory ? _scaffold.Reset : null;
@@ -51,17 +57,10 @@ abstract class WorldMazeBase : MonoBehaviour
 
         _moduleIDCounters.IncSafe(Module.ModuleType);
         _moduleID = _moduleIDCounters[Module.ModuleType];
-        var modConfig = new ModConfig<WorldSettings>("WorldSettings");
-        Settings = modConfig.Settings;
         _scaffold.VisCurrent.color = Color.black;
         _scaffold.VisMaze.color = Color.black;
         _scaffold.VisDestination.color = Color.black;
-        _scaffold.Reset.gameObject.SetActive(false);
-
-        // Mode and AutoReset are used for TP compatibility, rather than using Settings.Mode and Settings.AutoReset throughout the code.
-        // This is so they can be set during the instance of TP without changing the setting.
-        Mode = Settings.Mode;
-        AutoReset = Settings.AutoReset;
+        _scaffold.VisReset.color = Color.black;
 
         if (_scaffold.RuleSeedable != null)
         {
@@ -109,6 +108,7 @@ abstract class WorldMazeBase : MonoBehaviour
         _scaffold.VisCurrent.color = Color.white;
         _scaffold.VisMaze.color = Color.white;
         _scaffold.VisDestination.color = Color.white;
+        _scaffold.VisReset.color = Color.white;
 
         _isActive = true;
         Log("Departing {0} ({1}) to {2} ({3}).", GetStateFullName(_originState), GetStateDisplayName(_originState), GetStateFullName(_destinationState), GetStateDisplayName(_destinationState));
@@ -140,7 +140,7 @@ abstract class WorldMazeBase : MonoBehaviour
             else
             {
                 Log("{0} - traveled from {1} ({2}) to {3} ({4}).", _shapes[i], GetStateFullName(_currentState), GetStateDisplayName(_currentState), GetStateFullName(result.NewState), GetStateDisplayName(result.NewState));
-                setCurrentState(result.NewState);
+                setCurrentState(result.NewState, result.RequireView);
                 if (_currentState == _destinationState)
                 {
                     Log("Arrived at destination!", _moduleID);

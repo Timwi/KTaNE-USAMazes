@@ -9,6 +9,6 @@ sealed class WorldMazeScaffold : MonoBehaviour
 
     public KMSelectable[] Shapes;
     public KMSelectable Reset;
-    public TextMesh VisCurrent, VisMaze, VisDestination;
+    public TextMesh VisCurrent, VisMaze, VisDestination, VisReset;
 #pragma warning restore 649
 }
