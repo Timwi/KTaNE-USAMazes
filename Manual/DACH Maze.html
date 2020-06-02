@@ -72,7 +72,7 @@
         };
         let shapes = [ "Circle", "Square", "Diamond", "Trapezoid", "Parallelogram", "Triangle", "Heart", "Star" ];
         let states = 'ag,ai,ar,bb,be,bl,bn,bs,bu,bw,by,fl,fr,ge,gl,gr,hb,he,hh,ju,kn,lu,mv,nd,ne,ni,no,nt,nw,oo,ot,ow,rp,sa,sc,sg,sh,sl,sm,sn,so,st,sz,tg,th,ti,ur,vd,vo,vs,wi,zg,zh'.split(',');
-        let stateBorders = 'ag-bl,bl-bs,ag-bw,ag-lu,ag-so,ag-zg,ag-zh,ai-ar,ai-sg,ar-sg,bb-be,bb-mv,bb-ni,bb-sn,bb-st,bn-vd,bl-ju,bl-so,bn-fr,bn-ju,bn-lu,bn-ne,bn-ow,bn-so,bn-ur,bn-vd,bn-vs,bs-bw,bu-no,bu-sm,bw-by,bw-he,bw-rp,bw-tg,bw-zh,by-he,by-nt,by-oo,by-sa,by-sn,by-th,by-vo,fl-gr,fl-sg,fl-vo,fr-vd,ge-vd,gl-gr,gl-sg,gl-sz,gl-ur,gr-nt,gr-sg,gr-ti,gr-ur,gr-vo,hb-ni,ni-sh,he-ni,he-nw,he-rp,he-th,hh-ni,hh-sh,ju-so,kn-ot,kn-sa,kn-sm,lu-nd,lu-ow,lu-sz,mv-ni,mv-sh,nd-ow,nd-ur,ne-vd,ni-st,ni-th,no-oo,no-sm,no-wi,nt-sa,nt-vo,nw-ni,nw-rp,oo-sa,oo-sm,ot-sa,ow-ur,rp-sl,sa-sm,sg-sz,sg-tg,sg-vo,sg-zh,sc-bw,sc-tg,sc-zh,sn-st,sn-th,st-th,sz-ur,sz-zg,sz-zh,tg-zh,ti-ur,ti-vs,ur-vs,vd-vs,zg-zh'.split(',');
+        let stateBorders = 'ag-bl,bl-bs,ag-bw,ag-lu,ag-so,ag-zg,ag-zh,ai-ar,ai-sg,ar-sg,bb-be,bb-mv,bb-ni,bb-sn,bb-st,bn-vd,bl-ju,bl-so,bn-fr,bn-ju,bn-lu,bn-ne,bn-ow,bn-so,bn-ur,bn-vs,bs-bw,bu-no,bu-sm,bw-by,bw-he,bw-rp,bw-tg,bw-zh,by-he,by-nt,by-oo,by-sa,by-sn,by-th,by-vo,fl-gr,fl-sg,fl-vo,fr-vd,ge-vd,gl-gr,gl-sg,gl-sz,gl-ur,gr-nt,gr-sg,gr-ti,gr-ur,gr-vo,hb-ni,ni-sh,he-ni,he-nw,he-rp,he-th,hh-ni,hh-sh,ju-so,kn-ot,kn-sa,kn-sm,lu-nd,lu-ow,lu-sz,mv-ni,mv-sh,nd-ow,nd-ur,ne-vd,ni-st,ni-th,no-oo,no-sm,no-wi,nt-sa,nt-vo,nw-ni,nw-rp,oo-sa,oo-sm,ot-sa,ow-ur,rp-sl,sa-sm,sg-sz,sg-tg,sg-vo,sg-zh,sc-bw,sc-tg,sc-zh,sn-st,sn-th,st-th,sz-ur,sz-zg,sz-zh,tg-zh,ti-ur,ti-vs,ur-vs,vd-vs,zg-zh'.split(',');
         let clashes = 'be,bn;nd,nw;sc,sh;sm,st'.split(';').map(pair => pair.split(','));
 
         function setBorderShape(borderId, shape)    // shape === null for “no border”
@@ -212,7 +212,7 @@
                 <img src="img/Component/DACH Maze.svg" class="diagram">
                 <h2>On the Subject of DACH Maze</h2>
                 <p class="flavour-text">The roof of the world.</p>
-                <p>This module has three displays: a large display that shows your current location*, and two smaller displays, one that says “DACH”** and one that shows your destination. Use the map and the <strong>Abbreviation</strong> table below to find the correct path. Use the shapes on the module to cross boundaries between adjacent states, cantons and countries. If you pressed a shape that is not on the border of the region you are currently at, a strike will be recorded.</p>
+                <p>This module has three displays: a large display that shows your current location, and two smaller displays, one that says “DACH”* and one that shows your destination. Use the map and the <strong>Abbreviation</strong> table below to find the correct path. Use the shapes on the module to cross boundaries between adjacent states, cantons and countries. If you pressed a shape that is not on the border of the region you are currently at, a strike will be recorded.</p>
                 <p>Since some regions have clashing two-letter abbreviations, you may need to travel to an adjacent region first to determine where you actually are.</p>
                 <div class='no-print' style='text-align: center;'>Click the map to zoom in.</div>
                 <div id='zoom-container'>
@@ -308,7 +308,7 @@
                             <path id="ju-so" stroke="#000" d="M2181 947.6l-.6-.3V946.7l-.8-.8h-1l-.4.2-1.3-.1-.2-.2-.7-.3v-.2"/>
                             <path id="bl-ju" stroke="#000" d="M2176 945.3h-1v-.8l-.6-.4-1-.6v-.3H2172.5l.1-.4-1.4-.8v-.5"/>
                             <path id="bn-ne" stroke="#000" d="M2150.9 959l.9 2.4.1.3-1.1 2.2.3.3.8-.4 1-.6.4-.3 1-.2.5-.2.9-.2h.5l1-.6h.6l.6-.3.2.3-.7.8.6.2h.2l1.9 1.4.1.4-.4.3.4 1.2-.5.4-1 .5-.7.6-.2.7v.7l-.1.4"/>
-                            <path id="bn-vd" stroke="#000" d="M2158.2 969.3V970.5c0 .2.4.5.4.5l1 .2"/>
+                            <path id="bn-vd" stroke="#000" d="M2158.2 969.3V970.5c0 .2.4.5.4.5l1 .2M2166.4 1012.9l-.3-1.4-.1-.7-.1-.5-.7-.7.8-2.3-.7-1.6 1.2-.2h0l.5-.7-.3-1.8-.1-.4.7-1.4.4-.7-.1-.5-.4-1.6"/>
                             <path id="bn-fr" stroke="#000" d="M2159.7 971.2h1.1l2.1-.4.4-.1h.3l.3-.2.5-.2.3-.2.4-.2.5-.3.7-.1.3.6.3.2v.7l-.3.4-1.2.7v.1h.3l.3.8-.2.7.3.7-.3.4v.5l-.7.8.3.2h1l.5-.4.4.4h.8l1 .5 2.4-.3.3.4h.5l.3 1.6-1 .9-.9-.8-.6.6 1.2 1.1-.4.7v.6l-.8 1.4v.3l-.5 1 .2.5.4 1-.2 1.7 2.2.7-.2.9h.2l1.3.5-.2 1v1.2l-1 .6-.3-.5h-.7v.8l-.8.4.3 2.6v.2l-.3.3-.6.5-.8-.3-.9 1.4-1 .6"/>
                             <path id="bn-ow" stroke="#000" d="M2202.8 983.3h1.9l.6.8.9.3h0l1.2 1 .9-.5 1.3-.7 1.3.7.7-.5 1.6.9 1.7-1.3 2.1-.9.9.7.3.7 1-.5 1.2.2.1.4"/>
                             <path id="nd-ow" stroke="#000" d="M2221.4 978.8l-2.2.2-.1-1.1h-.6l-.5.7-.3.3h-.4l.2-1.2-.4-.1-.4.6-1.5-.8.4-.8V974h-.3l-1 .3-1-.6.8-1.4.1-.9v-.4l-3.4.3"/>
@@ -331,7 +331,6 @@
                             <path id="ti-vs" stroke="#000" d="M2222 999.7l-.6 1.2-3.1 1.2v2.4"/>
                             <path id="ne-vd" stroke="#000" d="M2133 979l1 .3 2-.7.5-.3 1.1-.8.3-.2.4-.2.4-.1.7-.2h.8l.4-.3.7-.9.7-.7.3-.1 1.7-.8.6-.3.1.3-.2 1.2-.1.4 1 1v.4h0v.4l-.2.5h.8l.3-.5.5-.7.5-.4 1-1.2 1.1-.7h.3v-.4l.4-.4.6-.2.5-.2.2-.7-.1-1 1-.5 2.6-1 .6-.7.5-.4.6.3.1.2.6.1h.2l.7-.2"/>
                             <path id="vd-vs" stroke="#000" d="M2150.5 1008.4l1 1.3.1.7-.2.6.6 1h1l.6 1h0l.2 1.7.6.4.5.8.4 1 .4.4.3.3.7 1.8.2.3.2 1 1 1.1 1-.5.6-.4.2.2.6-.2 1.2-1 .5-1.3 1-.1.8-1.3 1.8-1.4-.6-1.4.3-.6.9-1"/>
-                            <path id="bn-vd" stroke="#000" d="M2166.4 1012.9l-.3-1.4-.1-.7-.1-.5-.7-.7.8-2.3-.7-1.6 1.2-.2h0l.5-.7-.3-1.8-.1-.4.7-1.4.4-.7-.1-.5-.4-1.6"/>
                             <path id="fr-vd" stroke="#000" d="M2167.2 998.4l-.8.5-.3.7-.8.2-.1-1-1 .9-1.1.8-.3 1-1.2.6-.3.6h-1.9l-1 .7-.4.7-.3.6-.3.4-1.5.6-.1-1.6.2-.7-.8-1.2-.2-.2.1-.2-.2-.1-.3-.1-.7-.3-1.1-.4-.4.4h-.3v-.8l-.3-.2-.4.6-1 1.3h-.4l-.4-.9h-.3l-.1-.4h-.3l-.5-.9.5-1 .4.3.8-.2.4.7.3-.7.7-.7.4-.4h.1l.4-.2-.2-.6-.5.5-.7-.4-.3-.5h0l-.5-.3h-.5 0l-.3.4h-.2l-.2-.1-.2-.5h-.3v.4l-.7.3-.2-.1.2-.5.1-.6v-.5l.1-.5-.2-2 .3-.4-.2-.3h.8l.8-.8.4.1.2.3h.2l.6-.3.2-.8-.3-.2.5-.7.4-.2.4-.6v-.1l.2-.4 1-1v.1l.6-.6v-.2l.3-.7 4.8-7 .3-.4h0l.2-.1.2-.4-.2-.7.6-1h.4l.3-.5v-.3l-.3-.3-.1-.2-.5-1-.1-.3-.2-.3-.1-.7.2-1.6"/>
                             <path id="ge-vd" stroke="#000" d="M2119.8 1014.5l-1.3-.7-.7-.8"/>
                             <path id="gr-sg" stroke="#000" d="M2255.5 974.2l.8.5h1.2l2.1.4 1.5.2h1.7l.2.1 1.1 1 .2.2.6-.7.3-.3v-.6l.5-.6.7-2.3v-.6l1-.1.1-1.1 1-.3-.1-.1-1-1.3-.6-.7-.3-.5-.5-1-.3-.4-.4-.6v-.1"/>
@@ -431,7 +430,6 @@
                             <path id="ju-so-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5192.4, 2267)" />
                             <path id="bl-ju-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5213.3, 2260.9)" />
                             <path id="bn-ne-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5183.1, 2313.5)" />
-                            <path id="bn-vd-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5161.6, 2353.8)" />
                             <path id="bn-fr-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5207.4, 2359.6)" />
                             <path id="bn-ow-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5308.6, 2362.2)" />
                             <path id="nd-ow-sh" d="M -8,-8 H 8 V 8 H -8 Z" transform="translate(5316.2, 2340.2)" />
@@ -467,7 +465,6 @@
                         </g>
                         <g id="border-lines-small" stroke="#000" stroke-opacity=".3" stroke-width="1.5" transform="scale(0.4167)">
                             <path id="ge-vd-li" d="M5093.3 2409.7l-7 20.8"/>
-                            <path id="bn-vd-li" d="M5178.4 2331.8l-9.8 12.2"/>
                             <path id="ju-so-li" d="M5229.3 2273l-26.6-1"/>
                             <path id="bs-bw-li" d="M5253.7 2222.2l-7 10"/>
                             <path id="bw-zh-li" d="M5317.5 2220.5l8 15"/>
@@ -525,7 +522,7 @@
                 </div>
                 <p>Black lines represent borders you cannot cross, while white lines represent borders you are allowed to cross. Once you get to your destination, the module is disarmed.</p>
 
-                <p class='footnote'>**If the top right panel doesn’t say DACH, you are looking at a different module.</p>
+                <p class='footnote'>* If the top right panel doesn’t say DACH, you are looking at a different module.</p>
             </div>
             <div class="page-footer relative-footer">Page 1 of 2</div>
         </div>

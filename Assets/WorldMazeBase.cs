@@ -44,8 +44,8 @@ abstract class WorldMazeBase : MonoBehaviour
             moduleSelectable.Children[i + 4] = _scaffold.Shapes[i];
         }
         var modConfig = new ModConfig<WorldSettings>("WorldSettings");
-        Settings = modConfig.Settings;
-        modConfig.Settings = Settings;
+        Settings = modConfig.Settings;  // Reads settings from the file
+        modConfig.Settings = Settings;  // Writes back the file
         Mode = Settings.Mode;
         AutoReset = Settings.AutoReset;
 
@@ -140,7 +140,7 @@ abstract class WorldMazeBase : MonoBehaviour
             else
             {
                 Log("{0} - traveled from {1} ({2}) to {3} ({4}).", _shapes[i], GetStateFullName(_currentState), GetStateDisplayName(_currentState), GetStateFullName(result.NewState), GetStateDisplayName(result.NewState));
-                setCurrentState(result.NewState, result.RequireView);
+                setCurrentState(result.NewState, _scaffold.VisCurrent.text != "" && result.RequireView);
                 if (_currentState == _destinationState)
                 {
                     Log("Arrived at destination!", _moduleID);
@@ -212,7 +212,7 @@ abstract class WorldMazeBase : MonoBehaviour
                 Mode = Mode.Memory;
                 AutoReset = !m.Groups[1].Value.Equals("memory", StringComparison.InvariantCultureIgnoreCase);
             }
-            setCurrentState(_originState);
+            setCurrentState(_originState, alwaysShow: true);
             return new KMSelectable[0];
         }
         return null;
