@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Name: WorkshopItem
   m_EditorClassIdentifier: 
   WorkshopPublishedFileID: 1414215029
-  Title: USA Maze
+  Title: World Mazes
   Tags:
   - Regular Module

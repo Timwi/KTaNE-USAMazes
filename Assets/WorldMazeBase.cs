@@ -43,17 +43,17 @@ abstract class WorldMazeBase : MonoBehaviour
             _scaffold.Shapes[i].Parent = moduleSelectable;
             moduleSelectable.Children[i + 4] = _scaffold.Shapes[i];
         }
+        _scaffold.Reset.Parent = moduleSelectable;
+        moduleSelectable.ChildRowLength = 4;
         var modConfig = new ModConfig<WorldSettings>("WorldSettings");
         Settings = modConfig.Settings;  // Reads settings from the file
         modConfig.Settings = Settings;  // Writes back the file
+        // Don't change settings if they're defined in the prefab
+#if !UNITY_EDITOR
         Mode = Settings.Mode;
         AutoReset = Settings.AutoReset;
-
-        _scaffold.Reset.Parent = moduleSelectable;
-        _scaffold.Reset.gameObject.SetActive(Mode == Mode.Memory);
-        moduleSelectable.Children[3] = Mode == Mode.Memory ? _scaffold.Reset : null;
-        moduleSelectable.ChildRowLength = 4;
-        moduleSelectable.UpdateChildren();
+#endif
+        ModeCheck();
 
         _moduleIDCounters.IncSafe(Module.ModuleType);
         _moduleID = _moduleIDCounters[Module.ModuleType];
@@ -97,6 +97,14 @@ abstract class WorldMazeBase : MonoBehaviour
     {
         _currentState = code;
         _scaffold.VisCurrent.text = alwaysShow || Mode == Mode.Standard ? GetStateDisplayName(code) : "";
+    }
+
+    private void ModeCheck()
+    {
+        _scaffold.Reset.gameObject.SetActive(Mode == Mode.Memory);
+        var moduleSelectable = _scaffold.Reset.Parent;
+        moduleSelectable.Children[3] = Mode == Mode.Memory ? _scaffold.Reset : null;
+        moduleSelectable.UpdateChildren();
     }
 
     void Activate()
@@ -203,15 +211,17 @@ abstract class WorldMazeBase : MonoBehaviour
         }
         else if (Mode == Mode.Memory && Regex.IsMatch(command, @"^\s*reset\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant))
             return new[] { _scaffold.Reset };
-        else if ((m = Regex.Match(command, @"^\s*(?:mode|set *mode|switch|toggle)\s+(standard|memory|memory *reset)\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).Success)
+        else if ((m = Regex.Match(command, @"^\s*(?:mode|set *mode|switch|toggle)\s+(standard|memory *reset|memory)\s*$", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant)).Success)
         {
             if (m.Groups[1].Value.Equals("standard", StringComparison.InvariantCultureIgnoreCase))
                 Mode = Mode.Standard;
             else
             {
                 Mode = Mode.Memory;
-                AutoReset = !m.Groups[1].Value.Equals("memory", StringComparison.InvariantCultureIgnoreCase);
+                if (!m.Groups[1].Value.Equals("memory", StringComparison.InvariantCultureIgnoreCase))
+                    AutoReset = !AutoReset;
             }
+            ModeCheck();
             setCurrentState(_originState, alwaysShow: true);
             return new KMSelectable[0];
         }
@@ -254,6 +264,8 @@ abstract class WorldMazeBase : MonoBehaviour
         var parents = new Dictionary<string, Connection>();
         var q = new Queue<string>();
         q.Enqueue(_currentState);
+        // Show the display when autosolving
+        Mode = Mode.Standard;
 
         while (q.Count > 0)
         {

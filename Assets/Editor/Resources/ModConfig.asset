@@ -15,8 +15,9 @@ MonoBehaviour:
   title: World Mazes
   author: River, Blananas2, Timwi
   description: "Are you ready for a road trip? It'll be over before you know it!\r\n\nThis
-    mod contains two modules:\n- USA Maze: travel through the states of the USA!\n-
-    DACH Maze: travel through Germany, Austria and Switzerland!\n\nModule: Blananas2
+    mod contains two modules:\n- [url=ktane.timwi.de/HTML/USA%20Maze.html]USA Maze[/url]:
+    travel through the states of the USA!\n- [url=ktane.timwi.de/HTML/DACH%20Maze.html]DACH
+    Maze[/url]: travel through Germany, Austria and Switzerland!\n\nModule: Blananas2
     & Timwi\r\nImplementation: Riverbui & Timwi\r\nModels: TheyCallMeSpy\r\nModule
     IDs: USA, DACH\n\r\nThese modules have some options that allow you to change the
     way you interact with the modules. You can choose to play in Standard Mode, where
@@ -25,4 +26,4 @@ MonoBehaviour:
     you\u2019re pressing. Standard Mode is enabled by default."
   version: v2.0
   outputFolder: build
-  previewImage: {fileID: 2800000, guid: d05a4b15e80097c4c92283272d928e6d, type: 3}
+  previewImage: {fileID: 2800000, guid: 361a316e5d4ab804db87f3c46a06fad3, type: 3}
