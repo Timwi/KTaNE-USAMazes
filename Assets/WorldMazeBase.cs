@@ -111,7 +111,7 @@ abstract class WorldMazeBase : MonoBehaviour
     {
         _scaffold.VisMaze.text = MazeID;
         _scaffold.VisCurrent.text = GetStateDisplayName(_currentState);
-        _scaffold.VisDestination.text = _destinationState;
+        _scaffold.VisDestination.text = GetStateDisplayName(_destinationState);
 
         _scaffold.VisCurrent.color = Color.white;
         _scaffold.VisMaze.color = Color.white;
