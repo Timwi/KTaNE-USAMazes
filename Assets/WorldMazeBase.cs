@@ -186,7 +186,7 @@ abstract class WorldMazeBase : MonoBehaviour
         }
     };
 
-    private readonly string TwitchHelpMessage = "!{0} press 01234567 | !{0} press c q d z p t h r [Circle, sQuare, Diamond, trapeZoid, Parallelogram, Triangle, Heart, staR] | !{0} mode (standard/memory/memoryreset) | !{0} reset [memory mode only]";
+    protected readonly string TwitchHelpMessage = "!{0} press 01234567 | !{0} press c q d z p t h r [Circle, sQuare, Diamond, trapeZoid, Parallelogram, Triangle, Heart, staR] | !{0} mode (standard/memory/memoryreset) | !{0} reset [memory mode only]";
 #pragma warning restore 414
 
     protected IEnumerable<KMSelectable> ProcessTwitchCommand(string command)
